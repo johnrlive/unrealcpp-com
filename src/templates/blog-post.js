@@ -5,10 +5,10 @@ import Navbar from '../components/Navbar'
 import Tag from '../components/Tag'
 import UnrealVersion from '../components/UnrealVersion'
 import YouTubeVideo from '../components/YouTubeVideo'
-import CommentList from '../components/CommentList'
 import AuthorCard from '../components/AuthorCard'
 import Footer from '../components/Footer'
 import author from '../author/harrison.json'
+import ReactDisqusComments from 'react-disqus-comments';
 
 const Template = ({ data }) => {
 
@@ -26,60 +26,47 @@ const Template = ({ data }) => {
   }
 
 
-  return (
-    <div>
-
+  return <div>
       <Navbar />
 
       <Helmet title={`Unreal C++ | ${post.frontmatter.title}`} />
 
-      <div className="blog-post-header" style={{ backgroundImage: `url(${ post.frontmatter.image })` }}>
-
-      { tags }
-
+      <div className="blog-post-header" style={{ backgroundImage: `url(${post.frontmatter.image})` }}>
+        {tags}
       </div>
-      
+
       <main id="site-main" className="site-main outer bg-white" role="main">
+        <div className="inner">
+          <article className="post-full">
+            <div className="blog-content">
+              <h1 className="post-full-title">{post.frontmatter.title}</h1>
 
-          <div className="inner">
+              <div className="date-meta">
+                <p>{post.frontmatter.date}</p>
 
-              <article className="post-full">
+                <UnrealVersion version={post.frontmatter.uev} />
+              </div>
 
-                  <div className="blog-content">
+              <YouTubeVideo id={post.frontmatter.video} />
 
-                      <h1 className="post-full-title">{ post.frontmatter.title }</h1>
+              <div dangerouslySetInnerHTML={{ __html: post.html }} />
 
-                      <div className="date-meta">
+              <hr />
 
-                        <p>{ post.frontmatter.date }</p>
+              <h3>Author</h3>
+              <AuthorCard image={author.image} name={author.name} twitter={author.twitter} email={author.email} />
 
-                        <UnrealVersion version={ post.frontmatter.uev } />
+              <hr />
 
-                      </div>
-
-                      <YouTubeVideo id={ post.frontmatter.video } />
-
-                      <div dangerouslySetInnerHTML={{ __html: post.html }} />
-
-                      <hr />
-
-                      <h3>Author</h3>
-                      <AuthorCard image={ author.image } name={ author.name } twitter={ author.twitter } email={ author.email } />
-
-                      <CommentList video={ post.frontmatter.video } />
-
-                  </div>
-
-              </article>
-
-          </div>
-
+              <ReactDisqusComments shortname="hunter-chang" identifier={post.title} title={post.frontmatter.title} url={'http://localhost:8000' + post.frontmatter.path} />
+            
+            </div>
+          </article>
+        </div>
       </main>
 
       <Footer />
-
     </div>
-  );
 }
 
 export default Template

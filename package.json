@@ -28,6 +28,7 @@
     "lodash": "^4.17.4",
     "lodash-webpack-plugin": "^0.11.4",
     "moment": "^2.19.3",
+    "react-disqus-comments": "^1.1.1",
     "react-helmet": "^5.2.0",
     "styled-components": "^3.0.2"
   },

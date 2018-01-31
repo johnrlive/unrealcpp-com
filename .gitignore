@@ -9,3 +9,5 @@ yarn-error.log
 screenshots/
 apiKeys.txt
 src/apikeys/
+package-lock.json
+yarn.lock
